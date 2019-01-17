@@ -14,6 +14,7 @@ function computerPlay() {
 }
 
 function playRound(playerSelection, computerSelection) {
+  playerSelection = playerSelection.toLowerCase();
   if (playerSelection == computerSelection) {
     return `It's a tie! Computer also choose ${computerSelection}.`
   } else {
@@ -39,7 +40,7 @@ function win(playerSelection, computerSelection) {
 }
 
 function lose(playerSelection, computerSelection) {
-  return `You lose. ${playerSelection} loses against ${computerSelection}.`
+  return `You lose. ${computerSelection} beats ${playerSelection}.`
 }
 
 const playerSelection = 'rock';
