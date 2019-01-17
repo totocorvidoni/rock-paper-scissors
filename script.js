@@ -36,12 +36,30 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function win(playerSelection, computerSelection) {
-  return `You Win!! ${playerSelection} beats ${computerSelection}.`
+  playerScore += 1;
+  return `You Win!! ${playerSelection} beats ${computerSelection}.`;
 }
 
 function lose(playerSelection, computerSelection) {
-  return `You lose. ${computerSelection} beats ${playerSelection}.`
+  computerScore += 1;
+  return `You lose. ${computerSelection} beats ${playerSelection}.`;
 }
 
-const playerSelection = 'rock';
-const computerSelection = computerPlay();
+function game() {
+  for (let i = 1; i <= 5; i++) {
+    console.log(`=== Round ${i} ===`);
+    console.log(`Player: ${playerScore} - Computer: ${computerScore} `);
+    console.log(playRound(prompt('rock, paper or scissors?'), computerPlay()));
+  }
+    console.log('The game is over and results are in...');
+  if (playerScore == computerScore) {
+    return 'It\'s a TIE.';
+  } else if (playerScore < computerScore) {
+    return 'Computer wins.';
+  } else if (playerScore > computerScore) {
+    return 'You WIN.'
+  }
+}
+
+let playerScore = 0;
+let computerScore = 0;
