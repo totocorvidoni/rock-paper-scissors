@@ -13,36 +13,36 @@ function computerPlay() {
   }
 }
 
-function playRound(playerSelection, computerSelection) {
-  playerSelection = playerSelection.toLowerCase();
-  if (playerSelection == computerSelection) {
-    return `It's a tie! Computer also choose ${computerSelection}.`
+function playRound(playerPick) {
+  computerPick = computerPlay();
+  if (playerPick == computerPick) {
+    console.log( `It's a tie! Computer also choose ${computerPick}.`)
   } else {
-    switch (playerSelection) {
+    switch (playerPick) {
       case 'rock':
-        return (computerSelection == 'scissors') ? win(playerSelection, computerSelection) : lose(playerSelection, computerSelection);
+        console.log( (computerPick == 'scissors') ? win(playerPick, computerPick) : lose(playerPick, computerPick));
         break;
       case 'paper':
-        return (computerSelection == 'rock') ? win(playerSelection, computerSelection) : lose(playerSelection, computerSelection);
+        console.log( (computerPick == 'rock') ? win(playerPick, computerPick) : lose(playerPick, computerPick));
         break;
       case 'scissors':
-        return (computerSelection == 'paper') ? win(playerSelection, computerSelection) : lose(playerSelection, computerSelection);
+        console.log( (computerPick == 'paper') ? win(playerPick, computerPick) : lose(playerPick, computerPick));
         break;
       default:
-        return 'Invalid Selection.'
+        console.log( 'Invalid Pick.')
         break;
     }
   }
 }
 
-function win(playerSelection, computerSelection) {
+function win(playerPick, computerPick) {
   playerScore += 1;
-  return `You Win!! ${playerSelection} beats ${computerSelection}.`;
+  return `You Win!! ${playerPick} beats ${computerPick}.`;
 }
 
-function lose(playerSelection, computerSelection) {
+function lose(playerPick, computerPick) {
   computerScore += 1;
-  return `You lose. ${computerSelection} beats ${playerSelection}.`;
+  return `You lose. ${computerPick} beats ${playerPick}.`;
 }
 
 function game() {
@@ -63,3 +63,12 @@ function game() {
 
 let playerScore = 0;
 let computerScore = 0;
+
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+
+rock.addEventListener('click', () => { playRound('rock') });
+paper.addEventListener('click', () => { playRound('paper') });
+scissors.addEventListener('click', () => { playRound('scissors') });
+  
