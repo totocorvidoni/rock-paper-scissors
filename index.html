@@ -3,20 +3,27 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="font-awesome/css/all.css">
-  <title>Document</title>
+  <title>Rock, Paper, Scissors</title>
 
 </head>
 <body>
-  <div class="grid">
-    <button id="rock">
+  <div class="wrapper">
+    <div class="score">
+        <div id="player-score">0</div>
+        <div id="computer-score">0</div>
+    </div>
+    <button id="rock" class="pick">
       <i class="far fa-hand-rock"></i>
     </button>
-    <button id="paper">
+    <button id="paper" class="pick">
       <i class="far fa-hand-paper"></i>
     </button>
-    <button id="scissors">
+    <button id="scissors" class="pick">
       <i class="far fa-hand-scissors"></i>
     </button>
+    <div id="results">
+      <p id="round-result"></p>  
+    </div>
   </div>
   <script src="script.js"></script>
 </body>

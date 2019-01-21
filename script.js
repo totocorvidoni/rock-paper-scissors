@@ -1,3 +1,30 @@
+/* === Set Up === */
+
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+const picks = document.querySelectorAll('.pick');
+const gameScore = document.querySelector('.score');
+const roundResult = document.querySelector('#round-result');
+const playerScoreBoard = document.querySelector('#player-score');
+const computerScoreBoard = document.querySelector('#computer-score');
+
+rock.addEventListener('click', () => { playRound('rock') });
+paper.addEventListener('click', () => { playRound('paper') });
+scissors.addEventListener('click', () => { playRound('scissors') });
+
+resetGame();
+
+/* === Game Logic === */
+
+function playRound(playerPick) {
+  computerPick = computerPlay();
+  gameRound += 1;
+  roundResult.textContent = getResult(playerPick, computerPick);
+  setScore();  
+  if (playerScore >= 5 || computerScore >= 5) endGame();
+}
+
 function computerPlay() {
   play = Math.ceil(Math.random() * 3);
   switch (play) {
@@ -13,23 +40,22 @@ function computerPlay() {
   }
 }
 
-function playRound(playerPick) {
-  computerPick = computerPlay();
+function getResult(playerPick, computerPick) {
   if (playerPick == computerPick) {
-    console.log( `It's a tie! Computer also choose ${computerPick}.`)
+    return `It's a tie! Computer also choose ${computerPick}.`
   } else {
     switch (playerPick) {
       case 'rock':
-        console.log( (computerPick == 'scissors') ? win(playerPick, computerPick) : lose(playerPick, computerPick));
+        return (computerPick == 'scissors') ? win(playerPick, computerPick) : lose(playerPick, computerPick);
         break;
       case 'paper':
-        console.log( (computerPick == 'rock') ? win(playerPick, computerPick) : lose(playerPick, computerPick));
+        return (computerPick == 'rock') ? win(playerPick, computerPick) : lose(playerPick, computerPick);
         break;
       case 'scissors':
-        console.log( (computerPick == 'paper') ? win(playerPick, computerPick) : lose(playerPick, computerPick));
+        return (computerPick == 'paper') ? win(playerPick, computerPick) : lose(playerPick, computerPick);
         break;
       default:
-        console.log( 'Invalid Pick.')
+        return 'Invalid Pick.'
         break;
     }
   }
@@ -37,6 +63,7 @@ function playRound(playerPick) {
 
 function win(playerPick, computerPick) {
   playerScore += 1;
+  if (playerScore)
   return `You Win!! ${playerPick} beats ${computerPick}.`;
 }
 
@@ -45,30 +72,53 @@ function lose(playerPick, computerPick) {
   return `You lose. ${computerPick} beats ${playerPick}.`;
 }
 
-function game() {
-  for (let i = 1; i <= 5; i++) {
-    console.log(`=== Round ${i} ===`);
-    console.log(`Player: ${playerScore} - Computer: ${computerScore} `);
-    console.log(playRound(prompt('rock, paper or scissors?'), computerPlay()));
+function endGame() {
+  endText = document.createElement('p');
+  endText.classList.add('toRemove');
+  if (playerScore >= 5) {
+    endText.textContent = 'Congratulations, you have won the game.'
+  } else {
+    endText.textContent = 'The computer has won the game.'
   }
-    console.log('The game is over and results are in...');
-  if (playerScore == computerScore) {
-    return 'It\'s a TIE.';
-  } else if (playerScore < computerScore) {
-    return 'Computer wins.';
-  } else if (playerScore > computerScore) {
-    return 'You WIN.'
-  }
+  gameScore.appendChild(endText);
+  disablePicks();
+  addResetButton();  
 }
 
-let playerScore = 0;
-let computerScore = 0;
+/* === Helpers === */
 
-const rock = document.querySelector('#rock');
-const paper = document.querySelector('#paper');
-const scissors = document.querySelector('#scissors');
+function setScore() {
+  playerScoreBoard.textContent = playerScore;
+  computerScoreBoard.textContent = computerScore;
+}
 
-rock.addEventListener('click', () => { playRound('rock') });
-paper.addEventListener('click', () => { playRound('paper') });
-scissors.addEventListener('click', () => { playRound('scissors') });
-  
+function resetGame() {
+  enablePicks();
+  playerScore = 0;
+  computerScore = 0;
+  gameRound = 0;
+  setScore();
+  cleanContent();
+}
+
+function disablePicks() {
+  picks.forEach(pick => pick.setAttribute('disabled', true));
+}
+
+function enablePicks() {
+ picks.forEach(pick => pick.removeAttribute('disabled')); 
+}
+
+function addResetButton() {
+  reset = document.createElement('button');
+  reset.textContent = 'Play Again?';
+  reset.classList.add('toRemove');
+  gameScore.appendChild(reset);
+  reset.addEventListener('click', resetGame);
+}
+
+function cleanContent() {
+  roundResult.textContent = '';
+  elements = document.querySelectorAll('.toRemove')
+  elements.forEach( element => element.remove())
+}
