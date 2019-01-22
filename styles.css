@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=Muli');
+
+body {
+  background: linear-gradient(to bottom left, #18f2b1, #5f9ef8, #8800d2) fixed;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.wrapper {
+  display: grid;
+  place-items: center;
+  margin-top: 2em;
+  font-family: 'Muli', sans-serif;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: .5em 1em;
+}
+
+.white-box {
+  background: #fff;
+  padding: 2em;
+  border-radius: .25em;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, .1);
+}
+
+.score {
+  grid-column: 1 / -1;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: center;
+  font-size: 10em;
+  font-weight: 700;
+  color: #404881;
+}
+
+.score > * {
+  margin: 0 .05em;
+}
+
+.pick {
+  border-radius: 50%;
+  border: 5px solid #b4ffe8bd;
+  /*box-shadow: 2px 2px 2px rgba(0, 0, 0, .3);*/
+  padding: 2em;
+  background: #404881;
+}
+
+.icon {
+  font-size: 5em;
+  color: #fff;
+  text-align: center;
+}
+
+#results {
+  grid-column: 1 / -1;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+#round-result {
+  grid-column: 1 / -1;
+}
+
+#game-over {
+  margin-top: 1em;
+  padding: 1em;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: space-between;
+  -ms-align-items: center;
+  align-items: center;
+}
+
+.end-text {
+  margin-right: 2em;
+}
+
+#game-over button {
+  background: #404881;
+  font-family: 'Muli', sans-serif;
+  font-weight: 700;
+  color: #fff;
+  border-radius: .5em;
+  border: none;
+  padding: 1em .5em;
+}

@@ -4,10 +4,11 @@ const rock = document.querySelector('#rock');
 const paper = document.querySelector('#paper');
 const scissors = document.querySelector('#scissors');
 const picks = document.querySelectorAll('.pick');
-const gameScore = document.querySelector('.score');
+const gameResults = document.querySelector('#results');
 const roundResult = document.querySelector('#round-result');
 const playerScoreBoard = document.querySelector('#player-score');
 const computerScoreBoard = document.querySelector('#computer-score');
+const gameOver = document.querySelector('#game-over')
 
 rock.addEventListener('click', () => { playRound('rock') });
 paper.addEventListener('click', () => { playRound('paper') });
@@ -73,14 +74,15 @@ function lose(playerPick, computerPick) {
 }
 
 function endGame() {
+  gameOver.classList.toggle('hidden');
   endText = document.createElement('p');
-  endText.classList.add('toRemove');
+  endText.classList.add('toRemove', 'end-text');
   if (playerScore >= 5) {
     endText.textContent = 'Congratulations, you have won the game.'
   } else {
     endText.textContent = 'The computer has won the game.'
   }
-  gameScore.appendChild(endText);
+  gameOver.appendChild(endText);
   disablePicks();
   addResetButton();  
 }
@@ -106,19 +108,20 @@ function disablePicks() {
 }
 
 function enablePicks() {
- picks.forEach(pick => pick.removeAttribute('disabled')); 
+  picks.forEach(pick => pick.removeAttribute('disabled')); 
 }
 
 function addResetButton() {
   reset = document.createElement('button');
-  reset.textContent = 'Play Again?';
+  reset.textContent = 'Restart';
   reset.classList.add('toRemove');
-  gameScore.appendChild(reset);
+  gameOver.appendChild(reset);
   reset.addEventListener('click', resetGame);
 }
 
 function cleanContent() {
   roundResult.textContent = '';
-  elements = document.querySelectorAll('.toRemove')
+  gameOver.classList.toggle('hidden');
+  elements = document.querySelectorAll('.toRemove', 'reset')
   elements.forEach( element => element.remove())
 }

@@ -8,21 +8,26 @@
 </head>
 <body>
   <div class="wrapper">
-    <div class="score">
+    <div class="grid white-box">
+      <div class="score">
         <div id="player-score">0</div>
+        <div>-</div>
         <div id="computer-score">0</div>
+      </div>
+      <button id="rock" class="pick">
+        <i class="icon fas fa-hand-rock"></i>
+      </button>
+      <button id="paper" class="pick">
+        <i class="icon fas fa-hand-paper"></i>
+      </button>
+      <button id="scissors" class="pick">
+        <i class="icon fas fa-hand-scissors"></i>
+      </button>
+      <div id="results" class="">
+        <p id="round-result"></p>  
+      </div>
     </div>
-    <button id="rock" class="pick">
-      <i class="far fa-hand-rock"></i>
-    </button>
-    <button id="paper" class="pick">
-      <i class="far fa-hand-paper"></i>
-    </button>
-    <button id="scissors" class="pick">
-      <i class="far fa-hand-scissors"></i>
-    </button>
-    <div id="results">
-      <p id="round-result"></p>  
+    <div id="game-over" class="white-box">          
     </div>
   </div>
   <script src="script.js"></script>
