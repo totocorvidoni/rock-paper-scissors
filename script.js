@@ -4,8 +4,7 @@ const rock = document.querySelector('#rock');
 const paper = document.querySelector('#paper');
 const scissors = document.querySelector('#scissors');
 const picks = document.querySelectorAll('.pick');
-const gameResults = document.querySelector('#results');
-const roundResult = document.querySelector('#round-result');
+const roundResult = document.querySelector('#results');
 const playerScoreBoard = document.querySelector('#player-score');
 const computerScoreBoard = document.querySelector('#computer-score');
 const gameOver = document.querySelector('#game-over')
@@ -21,6 +20,7 @@ resetGame();
 function playRound(playerPick) {
   computerPick = computerPlay();
   gameRound += 1;
+  roundResult.classList.remove('hidden');
   roundResult.textContent = getResult(playerPick, computerPick);
   setScore();  
   if (playerScore >= 5 || computerScore >= 5) endGame();
@@ -122,6 +122,7 @@ function addResetButton() {
 function cleanContent() {
   roundResult.textContent = '';
   gameOver.classList.toggle('hidden');
+  roundResult.classList.toggle('hidden');
   elements = document.querySelectorAll('.toRemove', 'reset')
   elements.forEach( element => element.remove())
 }
